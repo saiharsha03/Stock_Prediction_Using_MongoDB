@@ -18,6 +18,5 @@ def update_metadata_date():
             metadata_collection.update_one({}, {"$set": {"date": today}})
             predicted_prices_db.drop()
             LSTM_Model()
-
     else:
         metadata_collection.insert_one({"date": today})

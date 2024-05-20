@@ -1,8 +1,6 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 from Base import main as fetch_new_data
-from LSTM import LSTM_Model
 import matplotlib.pyplot as plt
 from Database_Operations import fetch_data,fetch_actual_prices,fetch_predicted_prices
 from lstm_check import update_metadata_date
@@ -12,11 +10,10 @@ fetch_executed = True
 def fetch_latest():
     empty_placeholder = st.empty()
     empty_placeholder.write("Fetching New Data...")
-    # You can add your animation image here
     empty_placeholder.image("loading.gif")
-
     fetch_new_data()
     empty_placeholder.empty()
+
 def merge_data(predicted_df, actual_df):
     merged_df = pd.merge(predicted_df, actual_df, on='date', how='left')
     return merged_df
