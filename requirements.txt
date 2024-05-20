@@ -4,7 +4,6 @@ numpy
 matplotlib
 datetime
 pymongo
-time
 requests
 sklearn
 keras
