@@ -1,3 +1,5 @@
-API_KEY = "4VpZC9HdYhwuH7TYsCghUSBqQxOprpvr"
+import streamlit as st
 
-MONGO_URI = "mongodb+srv://saiharsharudra03:hP86SW589uuV84K@stock.txb5u4z.mongodb.net/'"
+API_KEY = st.secrets["API_KEY"]
+
+MONGO_URI = st.secrets["MONGO_URI"]
