@@ -5,7 +5,7 @@ import pandas as pd
 import os
 
 def connect_to_DB(database = "stock_data"):
-    os.write(1,"DB Connected")
+    os.write(1,b"DB Connected")
     client = MongoClient(keys.MONGO_URI)
     db = client['Stock_Prices']
     collection = db[database]
