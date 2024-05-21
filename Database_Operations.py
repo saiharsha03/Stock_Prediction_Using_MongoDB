@@ -2,9 +2,10 @@ import keys
 from datetime import datetime, timedelta
 from pymongo import MongoClient
 import pandas as pd
+import streamlit as st
 
 def connect_to_DB(database = "stock_data"):
-    print("DB Connected")
+    st.write("DB Connected")
     client = MongoClient(keys.MONGO_URI)
     db = client['your_database']
     collection = db[database]
