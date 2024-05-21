@@ -7,7 +7,7 @@ import streamlit as st
 def connect_to_DB(database = "stock_data"):
     st.write("DB Connected")
     client = MongoClient(keys.MONGO_URI)
-    db = client['your_database']
+    db = client['Stock_Prices']
     collection = db[database]
     return collection
 
