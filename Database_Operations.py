@@ -28,7 +28,10 @@ def get_latest_date():
         yesterday_date -= timedelta(days=2)
     yesterday_date_str = yesterday_date.strftime("%Y-%m-%d") 
     last_record= collection.find_one(sort=[("date", -1)])
-    x = last_record["date"]
+    try:
+        x = last_record["date"]
+    except:
+        x = "2023-01-09"
     today = datetime.now()
     today = today.strftime("%Y-%m-%d")
     return x,yesterday_date_str,today
