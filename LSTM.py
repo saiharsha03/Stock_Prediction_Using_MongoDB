@@ -1,15 +1,15 @@
-from pymongo import MongoClient
+#import necessary modules and functions
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import MinMaxScaler
 from keras.models import Sequential
 from keras.layers import LSTM, Dense
-import matplotlib.pyplot as plt
-import datetime
 from Database_Operations import connect_to_DB
-import os
+
 def LSTM_Model():
-    print(1,"Running LSTM Model")
+    """
+    Runs the LSTM model to predict stock prices and inserts the predicted prices into the database.
+    """
+    
     collection = connect_to_DB()
     projection = {"_id": 0, "Symbol": 1, "date": 1, "close": 1}  # Include Ticker, Date, and Close fields
     cursor = collection.find({}, projection)

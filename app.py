@@ -1,3 +1,4 @@
+#Import Necessary Modules and Functions
 import streamlit as st
 import pandas as pd
 from Base import main as fetch_new_data
@@ -8,6 +9,9 @@ from lstm_check import update_metadata_date
 fetch_executed = True
 
 def fetch_latest():
+    """
+    Fetches the latest data and updates the Streamlit app interface.
+    """
     empty_placeholder = st.empty()
     empty_placeholder.write("Fetching New Data...")
     empty_placeholder.image("loading.gif")
@@ -15,13 +19,36 @@ def fetch_latest():
     empty_placeholder.empty()
 
 def merge_data(predicted_df, actual_df):
+    """
+    Merges predicted and actual dataframes on the date column.
+    
+    Args:
+        predicted_df (DataFrame): DataFrame containing predicted prices.
+        actual_df (DataFrame): DataFrame containing actual prices.
+
+    Returns:
+        DataFrame: Merged DataFrame.
+    """
     merged_df = pd.merge(predicted_df, actual_df, on='date', how='left')
     return merged_df
 
 def filter_data(df, symbol):
+    """
+    Filters the DataFrame based on the selected symbol.
+    
+    Args:
+        df (DataFrame): DataFrame to be filtered.
+        symbol (str): Selected symbol.
+
+    Returns:
+        DataFrame: Filtered DataFrame.
+    """
     return df[df['Symbol'] == symbol]
 
 def main():
+    """
+    Main function to display the Streamlit app interface.
+    """
     st.title('Stock Closing Rates Variation')
     df = fetch_data()
     update_metadata_date()
