@@ -9,7 +9,7 @@ def connect_to_DB(database = "stock_data"):
     collection = db[database]
     return collection
 
-def insert_to_DB(collection,messages):
+def insert_to_DB(messages):
     collection = connect_to_DB()
     try:
         collection.insert_many(messages, ordered=False)
