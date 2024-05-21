@@ -4,12 +4,14 @@ from pymongo import MongoClient
 import pandas as pd
 
 def connect_to_DB(database = "stock_data"):
+    print("DB Connected")
     client = MongoClient(keys.MONGO_URI)
     db = client['your_database']
     collection = db[database]
     return collection
 
 def insert_to_DB(messages):
+    print("Inserting new Data")
     collection = connect_to_DB()
     try:
         collection.insert_many(messages, ordered=False)
