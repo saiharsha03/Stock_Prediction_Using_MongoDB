@@ -9,7 +9,7 @@ import datetime
 from Database_Operations import connect_to_DB
 import os
 def LSTM_Model():
-    os.write(1,b"Running LSTM Model")
+    print(1,"Running LSTM Model")
     collection = connect_to_DB()
     projection = {"_id": 0, "Symbol": 1, "date": 1, "close": 1}  # Include Ticker, Date, and Close fields
     cursor = collection.find({}, projection)

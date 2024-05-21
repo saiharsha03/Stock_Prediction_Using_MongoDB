@@ -14,6 +14,7 @@ def main():
     if (last_record == yesterday_date_str):
             return    
     for stock in stocks:
+        print(stock)
         os.write(1,b"Fetching New Data")
         url = f"{base_url}{stock}/range/1/day/{last_record}/{today}?adjusted=true&sort=desc&apiKey={api_key}"
         response = requests.get(url)
@@ -21,7 +22,7 @@ def main():
         for result in data["results"]:
             message = parse_result(result,stock)
             messages.append(message)
-            time.sleep(20)
+        time.sleep(20)
     if messages:
          insert_to_DB(messages)
 if __name__ == '__main__':
