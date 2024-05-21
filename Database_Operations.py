@@ -5,14 +5,14 @@ import pandas as pd
 import os
 
 def connect_to_DB(database = "stock_data"):
-    os.write("DB Connected")
+    os.write(1,"DB Connected")
     client = MongoClient(keys.MONGO_URI)
     db = client['Stock_Prices']
     collection = db[database]
     return collection
 
 def insert_to_DB(messages):
-    print("Inserting new Data")
+    os.write(1,"Inserting new Data")
     collection = connect_to_DB()
     try:
         collection.insert_many(messages, ordered=False)

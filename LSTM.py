@@ -7,8 +7,9 @@ from keras.layers import LSTM, Dense
 import matplotlib.pyplot as plt
 import datetime
 from Database_Operations import connect_to_DB
-
+import os
 def LSTM_Model():
+    os.write(1,"Running LSTM Model")
     collection = connect_to_DB()
     projection = {"_id": 0, "Symbol": 1, "date": 1, "close": 1}  # Include Ticker, Date, and Close fields
     cursor = collection.find({}, projection)
@@ -16,7 +17,6 @@ def LSTM_Model():
     df['date'] = pd.to_datetime(df['date'])
     df['numerical_representation'] = df['date'].apply(lambda x: x.timestamp())
     df = df.sort_values(by='numerical_representation')
-
     tickers = df["Symbol"].unique().tolist()
     for ticker in tickers:
         data = df[df['Symbol'] == ticker]
