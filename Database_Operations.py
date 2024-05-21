@@ -12,7 +12,7 @@ def connect_to_DB(database = "stock_data"):
     return collection
 
 def insert_to_DB(messages):
-    os.write(1,"Inserting new Data")
+    os.write(1,b"Inserting new Data")
     collection = connect_to_DB()
     try:
         collection.insert_many(messages, ordered=False)

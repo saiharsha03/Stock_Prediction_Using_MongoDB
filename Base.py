@@ -14,9 +14,8 @@ def main():
     if (last_record == yesterday_date_str):
             return    
     for stock in stocks:
-        os.write(1,"Fetching New Data")
+        os.write(1,b"Fetching New Data")
         url = f"{base_url}{stock}/range/1/day/{last_record}/{today}?adjusted=true&sort=desc&apiKey={api_key}"
-        os.write(1,url)
         response = requests.get(url)
         data = response.json()
         for result in data["results"]:
