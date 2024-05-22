@@ -55,16 +55,12 @@ def main():
     symbols = df['Symbol'].unique()
     selected_symbol = st.selectbox('Select Symbol', symbols)
     filtered_data = filter_data(df, selected_symbol)
-    
     st.line_chart(filtered_data.set_index('date')['close'], use_container_width=True)
-
     df1 = fetch_predicted_prices(selected_symbol)
     df1['date'] = pd.to_datetime(df1['date']).dt.strftime('%Y-%m-%d') 
     actual_df = fetch_actual_prices(selected_symbol)
     actual_df['date'] = pd.to_datetime(actual_df['date']).dt.strftime('%Y-%m-%d')  # Convert Date column to string format
-
     merged_df = merge_data(df1, actual_df)
-
     merged_df['close'] = merged_df['close'].fillna('Data not available')  # Fill missing actual prices with "Data not available"
     merged_df.rename(columns={'close': 'Actual_Price'}, inplace=True)
     st.line_chart(df1.set_index('date')["Predicted_Value"],use_container_width=True)
