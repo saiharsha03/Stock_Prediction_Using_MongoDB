@@ -27,5 +27,5 @@ def update_metadata_date():
         metadata_collection.insert_one({"date": today})
 
     if not metadata_doc:
-        os.write("Running LSTM Model")
+        os.write(1,b"Running LSTM Model")
         LSTM_Model() 

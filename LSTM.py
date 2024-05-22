@@ -10,7 +10,7 @@ def LSTM_Model():
     """
     Runs the LSTM model to predict stock prices and inserts the predicted prices into the database.
     """
-    os.write("Running LSTM Model")
+    os.write(1,b"Running LSTM Model")
     collection = connect_to_DB()
     projection = {"_id": 0, "Symbol": 1, "date": 1, "close": 1}  # Include Ticker, Date, and Close fields
     cursor = collection.find({}, projection)
