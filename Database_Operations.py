@@ -17,6 +17,9 @@ def connect_to_DB(database = "stock_data"):
     client = MongoClient(keys.MONGO_URI)
     db = client['Stock_Prices']
     collection = db[database]
+    collection.create_index(
+    [("date", ASCENDING), ("Symbol", ASCENDING)],
+    unique=True)
     return collection
 
 def insert_to_DB(messages):
