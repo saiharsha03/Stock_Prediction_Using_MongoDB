@@ -35,7 +35,7 @@ def LSTM_Model():
         data.set_index('date', inplace=True)
         data.drop('Symbol', axis=1, inplace=True)
         scaler = MinMaxScaler(feature_range=(0, 1))
-        scaled_data = scaler.fit_transform(df.values)
+        scaled_data = scaler.fit_transform(data.values)
         time_step = 1
         X_train, y_train = create_dataset(scaled_data, time_step)
         X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
@@ -46,7 +46,7 @@ def LSTM_Model():
         model.compile(optimizer='adam', loss='mean_squared_error')
         model.fit(X_train, y_train, epochs=100, batch_size=32)
         last_data = scaled_data[-time_step:]
-        next_dates = pd.date_range(start=df.index[-1] + timedelta(days=1), periods=15, freq='D')
+        next_dates = pd.date_range(start=data.index[-1] + timedelta(days=1), periods=15, freq='D')
         predicted_prices = []
         for i in range(15):
             last_data = np.reshape(last_data, (1, time_step, 1))
