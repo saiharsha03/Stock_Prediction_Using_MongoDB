@@ -52,8 +52,8 @@ def LSTM_Model():
             predicted_prices.append(prediction[0][0])
             last_data = np.append(last_data[:, 1:, :], prediction.reshape(1, 1, 1), axis=1)
         predicted_prices = scaler.inverse_transform(np.array(predicted_prices).reshape(-1, 1))
-        predicted_df = pd.DataFrame(predicted_prices, index=next_dates, columns=['Predicted Price'])
-        predicted_df['Date'] = next_dates
+        predicted_df = pd.DataFrame(predicted_prices, index=next_dates, columns=['Predicted_Value'])
+        predicted_df['date'] = next_dates
         forecast_df = predicted_df[[ 'date', 'Predicted_Value']]
         forecast_df["Symbol"]=ticker
         collection1 = connect_to_DB(database= "predicted_prices")
