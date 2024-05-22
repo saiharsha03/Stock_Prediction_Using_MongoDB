@@ -59,8 +59,7 @@ def main():
     st.line_chart(filtered_data.set_index('date')['close'], use_container_width=True)
 
     df1 = fetch_predicted_prices(selected_symbol)
-    df1['Date'] = pd.to_datetime(df1['Date']).dt.strftime('%Y-%m-%d') 
-    df1.rename(columns={'Date': 'date'}, inplace=True)
+    df1['date'] = pd.to_datetime(df1['date']).dt.strftime('%Y-%m-%d') 
     actual_df = fetch_actual_prices(selected_symbol)
     actual_df['date'] = pd.to_datetime(actual_df['date']).dt.strftime('%Y-%m-%d')  # Convert Date column to string format
 

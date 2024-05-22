@@ -33,7 +33,7 @@ def LSTM_Model():
         forecast_input = np.array([[date] for date in forecast_dates_numeric])
         forecast = model.predict(forecast_input).flatten()
         forecast_dates = pd.to_datetime(forecast_dates_numeric, unit='s')
-        forecast_df = pd.DataFrame({'Date': forecast_dates, 'Predicted_Value': forecast})
+        forecast_df = pd.DataFrame({'date': forecast_dates, 'Predicted_Value': forecast})
         forecast_df['Symbol'] = ticker
         collection1 = connect_to_DB(database= "predicted_prices")
         forecast_data = forecast_df.to_dict(orient='records')
