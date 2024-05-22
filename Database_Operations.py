@@ -18,7 +18,7 @@ def connect_to_DB(database = "stock_data"):
     db = client['Stock_Prices']
     collection = db[database]
     collection.create_index(
-    [("date", ASCENDING), ("Symbol", ASCENDING)],
+    [("date", 1), ("Symbol", 1)],
     unique=True)
     return collection
 
