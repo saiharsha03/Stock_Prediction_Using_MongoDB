@@ -5,6 +5,9 @@ from Base import main as fetch_new_data
 import matplotlib.pyplot as plt
 from Database_Operations import fetch_data,fetch_actual_prices,fetch_predicted_prices
 from lstm_check import update_metadata_date
+from datetime import datetime
+from pymongo import MongoClient
+import keys
 
 fetch_executed = True
 
@@ -52,6 +55,12 @@ def main():
     st.title('Stock Closing Rates Variation')
     df = fetch_data()
     update_metadata_date()
+    client = MongoClient(keys.MONGO_URI)
+    db = client['metadata_DB']
+    metadata_collection = db['metadata']
+    metadata_doc = metadata_collection.find_one()
+    datetime_obj = metadata_doc['date']
+    date_only_str = datetime_obj.date().strftime('%Y-%m-%d')
     symbols = df['Symbol'].unique()
     selected_symbol = st.selectbox('Select Symbol', symbols)
     filtered_data = filter_data(df, selected_symbol)
@@ -64,6 +73,7 @@ def main():
     merged_df['close'] = merged_df['close'].fillna('Data not available')  # Fill missing actual prices with "Data not available"
     merged_df.rename(columns={'close': 'Actual_Price'}, inplace=True)
     st.line_chart(df1.set_index('date')["Predicted_Value"],use_container_width=True)
+    st.write("The Predictions are based on historical data till "+date_only_str)
     st.subheader('Predicted Values')
     st.table(merged_df[['date', 'Predicted_Value', 'Actual_Price']])
 
